@@ -1,0 +1,1 @@
+export const list = ["Africa","America", "Asia", "Europe", "Oceania"]
