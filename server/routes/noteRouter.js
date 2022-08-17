@@ -41,7 +41,9 @@ const noteRoutes = (app, fs) => {
         }, true);
     })
 
-    // GET all notes on specific country
+
+
+    // GET specific note by id
     app.get("/api/note/:id", (req, res) => {
         
         const noteId = Number(req.params.id)
@@ -65,7 +67,9 @@ const noteRoutes = (app, fs) => {
         });
     })
 
-    // GET specific note by id
+
+
+    // GET all notes on specific country
     app.get("/api/notes/:country", (req, res) => {
         
         const chosenCountry = req.params.country
@@ -90,6 +94,7 @@ const noteRoutes = (app, fs) => {
     })
 
 
+    
     // DELETEs note by id
     app.delete("/api/delete/:id", (req, res) => {
 
