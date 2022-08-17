@@ -30,3 +30,7 @@ GET http://localhost:4000/api/note/1
 
 ### POST not working atm
 POST http://localhost:4000/api/notes
+
+
+### DELETE 
+DELETE  http://localhost:4000/api/delete/8

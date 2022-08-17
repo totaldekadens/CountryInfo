@@ -1,6 +1,5 @@
 import express from "express";
 import cors from 'cors';
-import data from './data/data.json' assert {type: "json"};
 import  fs  from 'fs';
 import routes from "./routes/routes.js";
 
@@ -13,9 +12,7 @@ app.get("/api", (req, res) => {
 
 app.use(cors());
 
-// Sending in "data" to secure it in overlapping process with fs
-routes(app,fs, data);
-
+routes(app, fs);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)
