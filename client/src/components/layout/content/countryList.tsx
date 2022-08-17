@@ -27,8 +27,6 @@ const CountryList: FC<Props> = (props) => {
         setCountry(chosenCountry)
     }
 
-    console.log(region)
-
     return region.length >= 1 ? (
         <div>
             <h1 style={{ paddingLeft: '20px', fontSize: props.search ? "20px" : "50px", color: "#063960"}}>

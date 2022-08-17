@@ -88,13 +88,13 @@ const noteRoutes = (app, fs) => {
             if(getCountry.length > 0) {
                 res.json(getCountry)
             } else {
-                res.json("Notes not found")
+                res.json(false)
             }
         });
     })
 
 
-    
+
     // DELETEs note by id
     app.delete("/api/delete/:id", (req, res) => {
 
@@ -125,7 +125,7 @@ const noteRoutes = (app, fs) => {
 
         let newData = req.body
 
-        console.log(req.body)
+        console.log(newData)
 
         /*     let newData = {
             "id": 8,
@@ -136,7 +136,7 @@ const noteRoutes = (app, fs) => {
             "date": "2021/08/26"
         } */
 
-        myObject.push(newData)
+    /*  myObject.push(newData)
 
         let newData2 = JSON.stringify(myObject);
 
@@ -145,7 +145,7 @@ const noteRoutes = (app, fs) => {
             if (err) throw err;
 
             console.log("New data added");
-        });
+        }); */
 
     })
 
