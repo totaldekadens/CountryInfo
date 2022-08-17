@@ -5,7 +5,11 @@ import CountryList from "./countryList"
 import CountrySingle from "./countrySingle"
 import FrontPage from "./frontPage"
 
-const Content: FC = () => {
+interface Props {
+    search?: string
+}
+
+const Content: FC<Props> = (props) => {
 
     // Context
     const {region} = useContext(RegionContext)
@@ -13,7 +17,7 @@ const Content: FC = () => {
     // If region has any value the list will show up instead of FrontPage and viceverca
     return region.length >= 1 ? (
         <div style={{...flex, margin: "100px 0px 10px 0px", width:"100%", justifyContent: "space-between"}}>
-            <CountryList/>
+            <CountryList search={props.search}/>
             <CountrySingle/>
         </div>
     ) : <FrontPage/>

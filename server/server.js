@@ -3,10 +3,7 @@ import fetch from 'node-fetch'
 import cors from 'cors';
 
 const app = express()
-const port = 3000
-
-app.use("/",express.static("client"))
-
+const port = 4000
 
 app.get("/api", (req, res) => {
     res.send("Server is running")
@@ -19,8 +16,6 @@ app.get("/api/external/region/:region", async (req, res) => {
     
     const region = req.params.region
 
-    console.log(region)
-
     let response = await fetch(`https://restcountries.com/v3.1/region/${region}`)
     let result = await response.json();
     res.json(result)
@@ -30,8 +25,6 @@ app.get("/api/external/region/:region", async (req, res) => {
 app.get("/api/external/country/:country", async (req, res) => {
     
     const country = req.params.country
-
-    console.log(country)
 
     let response = await fetch(`https://restcountries.com/v3.1/name/${country}`)
     let result = await response.json();

@@ -8,16 +8,18 @@ import {
     useMediaQuery,
     useTheme,
 } from "@mui/material";
-import DrawerComp from "./drawer";
-import { list } from "../../../data";
-import { RegionContext } from "../../context/regionProvider";
+import DrawerComp from "../interaction/drawer";
+import { list } from "../../data";
+import { RegionContext } from "../context/regionProvider";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { CountryContext } from "../context/countryProvider";
 
 const Navbar: FC = () => {
 
     // Context
     const {region, setRegion} = useContext(RegionContext)
+    const {setCountry} = useContext(CountryContext)
 
     // State
     const [value, setValue] = useState();
@@ -31,8 +33,7 @@ const Navbar: FC = () => {
     // If value matches with a region in the api it will show up as a result
     const handleClick = async(region: any) => {
         try {
-
-            let response = await fetch(`http://localhost:3000/api/external/region/${region}`)
+            let response = await fetch(`http://localhost:4000/api/external/region/${region}`)
             let result = await response.json();
 
             if(result) {
@@ -43,10 +44,15 @@ const Navbar: FC = () => {
         }
     }
 
+    const handleHomeClick = () => {
+        setCountry([])
+        setRegion([])
+    }
+
     return (
         <AppBar sx={{ background: "#063970" }}>
             <Toolbar>
-            <Link to={"/"} ><img src="https://www.freepnglogos.com/uploads/world-map-png/world-map-world-earth-globe-vector-graphic-pixabay-25.png" width="42px" alt="world map" /></Link>
+            <Link to={"/"} ><img onClick={handleHomeClick} src="https://www.freepnglogos.com/uploads/world-map-png/world-map-world-earth-globe-vector-graphic-pixabay-25.png" width="42px" alt="world map" /></Link>
                 <Typography sx={{ fontSize: "2rem", paddingLeft: "5%" }}>
                         Country Info
                 </Typography>

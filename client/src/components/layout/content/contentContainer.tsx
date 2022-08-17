@@ -10,11 +10,10 @@ const ContentContainer: FC = () => {
             <Routes>
                 <Route path="/" element={ <FrontPage /> } />
                 <Route path="/region" element={ <Content /> } />
+                <Route path="/search/:value" element={ <Content search={"Search result for: "} /> } />
             </Routes>
         </>
     )
 }
-
-
 
 export default ContentContainer

@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { list } from "../../../data";
+import { list } from "../../data";
 import {
     Drawer,
     IconButton,

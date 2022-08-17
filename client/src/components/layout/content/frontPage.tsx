@@ -2,7 +2,7 @@ import { CSSProperties, FC } from "react"
 import { flexCenter, flexColumn, flexRowBetween, flexRowCenter } from "../../../style/common"
 import CountryList from "./countryList"
 import CountrySingle from "./countrySingle"
-import SearchEngine from "./search"
+import SearchEngine from "../../interaction/search"
 
 const FrontPage: FC = () => {
     return(

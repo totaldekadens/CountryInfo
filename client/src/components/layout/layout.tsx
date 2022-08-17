@@ -2,8 +2,7 @@ import { FC } from "react"
 import { CountryProvider } from "../context/countryProvider"
 import { RegionProvider } from "../context/regionProvider"
 import ContentContainer from "./content/contentContainer"
-import Footer from "./footer"
-import Navbar from "./navbar/navbar"
+import Navbar from "./navbar"
 
 const Layout: FC = () => {
     return(
@@ -12,7 +11,6 @@ const Layout: FC = () => {
                 <CountryProvider>
                     <Navbar/>
                     <ContentContainer/>
-                    <Footer/>
                 </CountryProvider>
             </RegionProvider>
         </div>

@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { FC, useState, useContext } from 'react';
-import { RegionContext } from '../../context/regionProvider';
+import { RegionContext } from '../context/regionProvider';
 import { Link as RouterLink } from "react-router-dom";
 
 const SearchEngine: FC = () => {
@@ -17,7 +17,7 @@ const SearchEngine: FC = () => {
     const handleClick = async () => {
         try {
 
-            let response = await fetch(`http://localhost:3000/api/external/country/${searchValue}`)
+            let response = await fetch(`http://localhost:4000/api/external/country/${searchValue}`)
             let result = await response.json();
 
             if(result) {
@@ -26,7 +26,6 @@ const SearchEngine: FC = () => {
         } catch(err) {
             console.error(err)
         }
-
     }
 
     return (
@@ -51,7 +50,7 @@ const SearchEngine: FC = () => {
             {/* Todo: Add an event instead with keypress - enter? */}
             <Button 
                 onClick={handleClick}
-                component={RouterLink} to="/region"
+                component={RouterLink} to={`/search/${searchValue}`}
             >
                 Search
             </Button>
