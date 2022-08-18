@@ -6,13 +6,21 @@ In this assignment, you must create a website that displays information retrieve
 
 You then choose for yourself if you want to use an extended development stack in the project, note that this is not a requirement. Examples of frameworks you can add to your stack are: Typescript, React, Vue, Angular, etc.
 
+### My projects structure
+
+* Client: React.ts and mui
+* Server: Node.js using express
+* "Database": JSON-file using fs
+
+
+
 Below follows the assignments different requirements in Swedish.
 
 ### Krav för G
 
-1. Skapa ett API baserat på en valfri resurs (GET & POST) ✅❌
+1. Skapa ett API baserat på en valfri resurs (GET & POST) ✅
 2. Samtliga endpoints skall kunna nås via en REST Client fil (.rest) ✅❌
-3. Datan som API:et hanterar sparas lokalt i serverfilen ✅❌
+3. Datan som API:et hanterar sparas lokalt i serverfilen ✅
 4. Ett simpelt klient-gränssnitt skall finnas för att anropa ert API olika endpoints, samt visa upp resultatet vid GET anrop ✅❌
 5. Ert API skall hämta och data ifrån ett externt API och skicka vidare datan till klienten ✅
 6. Git & GitHub har använts ✅
