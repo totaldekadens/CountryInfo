@@ -19,7 +19,7 @@ Below follows the assignments different requirements in Swedish.
 ### Krav för G
 
 1. Skapa ett API baserat på en valfri resurs (GET & POST) ✅
-2. Samtliga endpoints skall kunna nås via en REST Client fil (.rest) ✅❌
+2. Samtliga endpoints skall kunna nås via en REST Client fil (.rest) ✅
 3. Datan som API:et hanterar sparas lokalt i serverfilen ✅
 4. Ett simpelt klient-gränssnitt skall finnas för att anropa ert API olika endpoints, samt visa upp resultatet vid GET anrop ✅❌
 5. Ert API skall hämta och data ifrån ett externt API och skicka vidare datan till klienten ✅
