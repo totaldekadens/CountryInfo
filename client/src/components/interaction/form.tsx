@@ -1,30 +1,26 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { FC, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import Button from '@mui/material/Button';
 import { flex } from '../../style/common';
-import { v4 as uuid } from 'uuid';
+import { CountryContext } from '../context/countryProvider';
 
 const CommentForm: FC = () => {
+
+    const {country} = useContext(CountryContext)
 
     const [name, setName] = useState<string>()
     const [city, setCity] = useState<string>()
     const [comment, setComment] = useState<string>()
 
-    const todayDate = new Date().toISOString().slice(0, 10);
-    
-    const unique_id = uuid();
-    const id = unique_id.slice(0,8)
-
-    // Fortsätt på denna ej klar. // Lägg till kommentar 
+    // Creates new comment
     const handleClick = async () => {
 
         const object = {
-            id: id,
             name: name,
             city: city,
             comment: comment,
-            date: todayDate
+            country: country.name.common
         }
 
         const body = {
@@ -37,7 +33,15 @@ const CommentForm: FC = () => {
             let response = await fetch('http://localhost:4000/api/notes', body)
             let result = await response.json();
     
-            console.log(result)
+            if(result) {
+                setName("")
+                setCity("")
+                setComment("")
+                // To do : Lägg till feedback och se till att kommentarerna uppdaterar sig med en gång
+            } else {
+                // To do: Feedback på varför det inte gick
+            }
+
         } catch(err) {
             console.error(err)
         }

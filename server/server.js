@@ -10,6 +10,7 @@ app.get("/api", (req, res) => {
     res.send("Server is running")
 })
 
+app.use(express.json())
 app.use(cors());
 
 routes(app, fs);

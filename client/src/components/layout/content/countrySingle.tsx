@@ -26,7 +26,7 @@ const CountrySingle: FC = () => {
         <div style={{...flex, justifyContent: "flex-end", marginTop: "32px"}}>
             <div style={{...flexColumn, paddingLeft: "50px", width:"550px"}}>
                 <h1 style={{color: "#063970"}}>{country.name.common}</h1>
-                <div style={{marginBottom:"5px"}}><img src={country.flags.png} alt="" /></div>  
+                <div style={{marginBottom:"5px"}}><img style={{height:"15vh"}} src={country.flags.png} alt="" /></div>  
                 <Box sx={{ width: '100%', typography: 'body1' }}>
                     <TabContext value={value}>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
