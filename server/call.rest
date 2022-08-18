@@ -1,10 +1,17 @@
 
+### GET all countries (external)
+GET https://restcountries.com/v3.1/all
+
 ### GET specific country (external)
 GET https://restcountries.com/v3.1/name/sweden
 
 ### GET all countries within a region (external)
 GET https://restcountries.com/v3.1/region/europe
 
+
+
+### GET all countries (including external)
+GET http://localhost:4000/api/external/all
 
 ### GET all countries within a region (including external)
 GET http://localhost:4000/api/external/region/europe
@@ -33,12 +40,25 @@ POST http://localhost:4000/api/notes
 Content-Type: application/json
 
 {
-    "country": "Sweden",
-    "city": "Göteborg",
+    "country": "Norge",
+    "city": "Oslo",
     "name": "Ange",
-    "comment": "Goa gubbar där!"
+    "comment": "Goa gubbar där också!"
 }
 
 
+### PUT - Change note // Inte fixad än
+PUT http://localhost:4000/api/notes
+Content-Type: application/json
+
+{
+    "country": "Norge",
+    "city": "Oslo",
+    "name": "Ange",
+    "comment": "Inte så goa gubbar längre"
+}
+
+
+
 ### DELETE 
-DELETE  http://localhost:4000/api/notes/DsVJRhJkJIWgFiz12_Qap
+DELETE  http://localhost:4000/api/notes/OAsdR-NuZSgKVKJo2p_E1

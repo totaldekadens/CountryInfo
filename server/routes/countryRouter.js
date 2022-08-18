@@ -2,6 +2,24 @@ import fetch from 'node-fetch'
 
 const countryRoutes = (app) => {
 
+    // GET all countries  (EXTERNAL)
+    app.get("/api/external/all", async (req, res) => {
+        try {
+
+            let response = await fetch(`https://restcountries.com/v3.1/all`)
+            let result = await response.json();
+
+            if(!result) {
+                throw new Error("Something wrong with external api")
+            } 
+            
+            res.json(result)
+
+        } catch(err) {
+            res.status(500).json(err.message)
+        }
+    })
+
     // GET all countries within a region (EXTERNAL)
     app.get("/api/external/region/:region", async (req, res) => {
         try {
