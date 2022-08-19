@@ -1,15 +1,17 @@
-import { CSSProperties, FC, useContext, useEffect, useState } from "react"
+import { CSSProperties, FC, useContext, useEffect, useRef, useState } from "react"
 import { flex, flexCenter, flexColumn, flexRowBetween } from "../../style/common"
 import { CountryContext } from "../context/countryProvider"
 import Avatar from '@mui/joy/Avatar';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import SimpleAccordion from "./accordion";
+import { deleteComment, getAllCommentsByCountry } from "../../helpers/fetchHelper";
+import { CommentsByCountryContext } from "../context/commentsByCountryProvider";
 
 interface Props {}
 
 interface Comment {
-        "id": number | string,
+        "id": string,
         "country": string
         "city": string
         "name": string
@@ -21,31 +23,51 @@ const Comments: FC<Props> = (props) => {
 
     // Context
     const {country} = useContext(CountryContext)
+    const {comments, setComments} = useContext(CommentsByCountryContext)
 
     // State
-    const [comments, setComments] = useState<Comment[] | []>([])
+    const [localComments, setLocalComments] = useState<Comment[] | []>([])
 
-    const handleDelete = (id: number|string) => {
-        console.log("Delete function")
+    /* If localComments and comments are not equal, comments has been updated. 
+    Adds ++ to change and will get in to useeffect. */
+    let change = 0
+
+    if(comments != localComments) {
+        change++    
     }
 
-    const handleEdit = (id: number|string) => {
+    // Deletes comment and update the comment field
+    const handleDelete = async (id: string) => {
+        
+        // Todo: Fix a "Are you sure?" -alert
+
+        await deleteComment(id)
+
+        let result = await getAllCommentsByCountry(country.name.common)
+
+            if(result) {
+                setComments(result)
+            }
+    }
+
+    const handleEdit = (id: string) => {
         console.log("Edit function")
     }
 
+    /* if any comments-context or country-context changes we gets into this 
+    useeffect and gets updated list with comments on the current country.  */
     useEffect(() => {
-        
+
         if(country) {
 
-            setComments([])
-
             const getComments = async() => {
+
                 try {
-                    let response = await fetch(`http://localhost:4000/api/notes/country/${country.name.common}`)
-                    let result = await response.json();
-            
+                    let result = await getAllCommentsByCountry(country.name.common)
+
                     if(result) {
                         setComments(result)
+                        setLocalComments(result)
                     }
                 } catch(err) {
                     console.error(err)
@@ -53,7 +75,7 @@ const Comments: FC<Props> = (props) => {
             }
             getComments();
         }
-    }, [country])
+    }, [country, change]) 
 
     return (
         <div style={flexColumn}>

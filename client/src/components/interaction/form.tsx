@@ -1,45 +1,71 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { FC, useContext, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import { flex } from '../../style/common';
 import { CountryContext } from '../context/countryProvider';
+import { addComment, getAllCommentsByCountry } from '../../helpers/fetchHelper';
+import validateForm from '../../validation/validateForm';
+import { CommentsByCountryContext } from '../context/commentsByCountryProvider';
 
 const CommentForm: FC = () => {
 
+    // Context
     const {country} = useContext(CountryContext)
+    const {comments, setComments} = useContext(CommentsByCountryContext)
 
-    const [name, setName] = useState<string>()
-    const [city, setCity] = useState<string>()
-    const [comment, setComment] = useState<string>()
+    // States
+    const [name, setName] = useState<string>("")
+    const [city, setCity] = useState<string>("")
+    const [comment, setComment] = useState<string>("")
+    const [error, setError] = useState({name: "", city: "", comment: ""})
+
+    // If you got an error on any input and then move on to another country, the values will go to default.
+    useEffect(() => {
+        if(country) {
+            setError({name: "", city: "", comment: ""})
+            setName("")
+            setCity("")
+            setComment("")
+        }
+    }, [country])
+
 
     // Creates new comment
     const handleClick = async () => {
 
-        const object = {
+        const newComment = {
             name: name,
             city: city,
             comment: comment,
             country: country.name.common
         }
 
-        const body = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(object)
-        };
+        // Validation
+        const checkErrors = validateForm(newComment)
+
+        if(Object.keys(checkErrors).length > 0) {
+            setError(checkErrors)
+            return
+        }
 
         try {
-            let response = await fetch('http://localhost:4000/api/notes', body)
-            let result = await response.json();
+            
+            let result = await addComment(newComment)
     
             if(result) {
                 setName("")
                 setCity("")
                 setComment("")
+                setError({name: "", city: "", comment: ""})
+
+                // Fetches and Updates context with current comments on country
+                let updateComments = await getAllCommentsByCountry(country.name.common)
+
+                    if(updateComments) {
+                        setComments(updateComments)
+                    }
                 // To do : Lägg till feedback och se till att kommentarerna uppdaterar sig med en gång
-            } else {
-                // To do: Feedback på varför det inte gick
             }
 
         } catch(err) {
@@ -62,6 +88,10 @@ const CommentForm: FC = () => {
                 variant="standard"
                 onChange={(event) => { setName(event.target.value) }}
                 value={name} 
+                required
+                autoFocus
+                error= {error?.name ? true : false}
+                helperText= {error?.name ? error.name : ""}
             />
             <TextField
                 id="standard-basic"
@@ -69,6 +99,9 @@ const CommentForm: FC = () => {
                 variant="standard"
                 onChange={(event) => { setCity(event.target.value) }}
                 value={city}
+                required
+                error= {error?.city ? true : false}
+                helperText= {error?.city ? error.city : ""}
             />
             <TextField
                 id="standard-multiline-static"
@@ -78,6 +111,9 @@ const CommentForm: FC = () => {
                 variant="standard"
                 onChange={(event) => { setComment(event.target.value) }}
                 value={comment}
+                required
+                error= {error?.comment ? true : false}
+                helperText= {error?.comment ? error.comment : ""}
             />
             <div style={{...flex, justifyContent: "flex-end", marginTop: "10px"}}>
                 <Button onClick={handleClick} variant="contained">Add comment</Button>

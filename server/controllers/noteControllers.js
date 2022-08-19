@@ -96,7 +96,7 @@ export const deleteNote = (req, res) => {
                 if (err) {
                     throw err;
                 }
-                res.status(200).send(`Note from ${foundNote.name} regarding ${foundNote.city} in ${foundNote.country} has been removed`);
+                res.json(`Note from ${foundNote.name} regarding ${foundNote.city} in ${foundNote.country} has been removed`);
             })
         });
     }catch(err) {
@@ -135,6 +135,7 @@ export const createNote = (req, res) => {
                     throw err;
                 }
                 res.json(`${newNote.country} has now a new comment!`);
+                
             })
         })
     } catch(err) {

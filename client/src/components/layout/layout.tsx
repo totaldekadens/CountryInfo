@@ -1,4 +1,5 @@
 import { FC } from "react"
+import { CommentsByCountryProvider } from "../context/commentsByCountryProvider"
 import { CountryProvider } from "../context/countryProvider"
 import { RegionProvider } from "../context/regionProvider"
 import ContentContainer from "./content/contentContainer"
@@ -9,8 +10,10 @@ const Layout: FC = () => {
         <div>
             <RegionProvider>
                 <CountryProvider>
-                    <Navbar/>
-                    <ContentContainer/>
+                    <CommentsByCountryProvider>
+                        <Navbar/>
+                        <ContentContainer/>
+                    </CommentsByCountryProvider>
                 </CountryProvider>
             </RegionProvider>
         </div>
