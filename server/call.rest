@@ -47,7 +47,7 @@ Content-Type: application/json
 }
 
 
-### PUT - Change note // Inte fixad än
+### PUT - Change note 
 PUT http://localhost:4000/api/notes
 Content-Type: application/json
 
@@ -56,7 +56,8 @@ Content-Type: application/json
     "country": "Norge",
     "city": "Oslo",
     "name": "Ange",
-    "comment": "Inte så goa gubbar längre"
+    "comment": "Inte så goa gubbar längre",
+    "date": "2022-08-18"
 }
 
 
