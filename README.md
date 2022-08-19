@@ -1,4 +1,4 @@
-# CountryInfo
+# CountryInfo - In progress
 SCHOOL: Individual assignment - Communication with Web APIs
 
 ## Description of assignment
