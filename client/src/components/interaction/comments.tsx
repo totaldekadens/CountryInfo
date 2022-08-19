@@ -41,7 +41,7 @@ const Comments: FC<Props> = (props) => {
 
             const getComments = async() => {
                 try {
-                    let response = await fetch(`http://localhost:4000/api/notes/${country.name.common}`)
+                    let response = await fetch(`http://localhost:4000/api/notes/country/${country.name.common}`)
                     let result = await response.json();
             
                     if(result) {
