@@ -119,7 +119,7 @@ export const createNote = (req, res) => {
             } 
 
             // Gets json file and new note 
-            let currentData = JSON.parse(data) 
+            data = JSON.parse(data) 
             let newNote = req.body 
 
             // Adds new unique id and todays date to the note.
@@ -127,10 +127,10 @@ export const createNote = (req, res) => {
             newNote.date = todayDate 
 
             // Adds the note to json file
-            currentData.push(newNote)
+            data.push(newNote)
 
             // Sends in the updated json-file
-            fs.writeFile(dataPath, JSON.stringify(currentData), (err) => {
+            fs.writeFile(dataPath, JSON.stringify(data), (err) => {
                 if (err) {
                     throw err;
                 }
@@ -146,7 +146,38 @@ export const createNote = (req, res) => {
 // PUT Edit note
 export const editNote = (req, res) => {
     try {
-        console.log(req.body)
+        fs.readFile(dataPath, 'utf8', (err, data) => {
+            if (err) {
+                throw err;
+            }
+
+            if(!req.body || (!req.body.id || !req.body.name || !req.body.city || !req.body.comment || !req.body.country )) {
+                throw new Error("Data was not provided correctly")
+            } 
+ 
+            data = JSON.parse(data) 
+
+            // Find index and also checks if the note exists. 
+            const findIndex = data.findIndex(note => note.id == req.body.id)
+
+            if(findIndex == -1) {
+                throw new Error("Id does not exist")
+            }
+
+            // Gets previous object before it gets edited (for use to feedback)
+            const findNote = data.find(note => note.id == req.body.id)
+
+            // Updates the previous note with updated info
+            data[findIndex] = req.body 
+
+            // Sends in the updated json-file
+            fs.writeFile(dataPath, JSON.stringify(data), (err) => {
+                if (err) {
+                    throw err;
+                }
+                res.json(`Comment from ${findNote.name} regarding ${findNote.city} in ${findNote.country} has now ben updated with new info!`);
+            })
+        })
     } catch(err) {
         res.status(404).json(err.message)
     }
