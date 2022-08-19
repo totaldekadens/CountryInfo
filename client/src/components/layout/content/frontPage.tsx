@@ -3,26 +3,26 @@ import { flexCenter, flexColumn, flexRowBetween, flexRowCenter } from "../../../
 import CountryList from "./countryList"
 import CountrySingle from "./countrySingle"
 import SearchEngine from "../../interaction/search"
+import { image, image2 } from "../../../data"
 
 const FrontPage: FC = () => {
     return(
-        <div style={{...flexColumn, ...container}}>
-            <SearchEngine/>
-            {/* Get new image */}
+        <div style={{...flexColumn, ...container, position: "relative"}}>
+            <SearchEngine heightButton={"50px"} heightInput={"20px"} widthInput={"300px"}/>
             <img 
-                src="https://www.freepnglogos.com/uploads/world-map-png/world-map-transparent-png-pictures-icons-and-png-12.png" 
-                width="70%" 
-                alt="world map transparent png pictures icons and png" 
+                src={image2} 
+                width="100%" 
+                alt="world map transparent png pictures icons and png"
+                style={{minHeight: "100vh", objectFit: "cover"}}
             />
         </div>
     )
 }
 
 const container: CSSProperties = {
-    margin: "150px 0px 10px 0px", 
-    height: "100%", 
+    margin: "0px", 
+    minHeight: "100vh", 
     alignItems: "center", 
-    rowGap: "30px"
 }
 
 export default FrontPage

@@ -2,13 +2,18 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { FC, useContext, useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
-import { flex } from '../../style/common';
+import { flex, flexCenter } from '../../style/common';
 import { CountryContext } from '../context/countryProvider';
-import { addComment, getAllCommentsByCountry } from '../../helpers/fetchHelper';
+import { AddComment, addComment, getAllCommentsByCountry } from '../../helpers/fetchHelper';
 import validateForm from '../../validation/validateForm';
 import { CommentsByCountryContext } from '../context/commentsByCountryProvider';
 
-const CommentForm: FC = () => {
+interface Props {
+    isUpdate?: boolean
+    comment: any // Så länge
+}
+
+const CommentForm: FC<Props> = (props) => {
 
     // Context
     const {country} = useContext(CountryContext)
@@ -34,7 +39,7 @@ const CommentForm: FC = () => {
     // Creates new comment
     const handleClick = async () => {
 
-        const newComment = {
+        const newComment: AddComment = {
             name: name,
             city: city,
             comment: comment,
@@ -73,7 +78,15 @@ const CommentForm: FC = () => {
         }
     }
 
+   
+
     return (
+        <>
+        {props.isUpdate ?
+        <div style={flexCenter}>
+            <h3>Edit comment</h3>
+        </div> : <div></div>}
+        
         <Box
             component="form"
             sx={{
@@ -86,10 +99,9 @@ const CommentForm: FC = () => {
                 id="standard-basic"
                 label="Name"
                 variant="standard"
-                onChange={(event) => { setName(event.target.value) }}
+                onChange={(event) => { setName( props.comment ? props.comment.name : event.target.value) }}
                 value={name} 
                 required
-                autoFocus
                 error= {error?.name ? true : false}
                 helperText= {error?.name ? error.name : ""}
             />
@@ -116,10 +128,10 @@ const CommentForm: FC = () => {
                 helperText= {error?.comment ? error.comment : ""}
             />
             <div style={{...flex, justifyContent: "flex-end", marginTop: "10px"}}>
-                <Button onClick={handleClick} variant="contained">Add comment</Button>
+                <Button onClick={handleClick} variant="contained">{ props.isUpdate ? "Update comment" : "Add comment"}</Button>
             </div>
-            
         </Box>
+        </>
     );
 }
 

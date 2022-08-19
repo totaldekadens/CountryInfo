@@ -32,7 +32,7 @@ const DrawerComp: FC = () => {
             </List>
         </Drawer>
         <IconButton
-            sx={{ color: "white", marginLeft: "auto" }}
+            sx={{ color: "black", marginLeft: "auto" }}
             onClick={() => setOpenDrawer(!openDrawer)}
         >
             <MenuIcon color="inherit" />

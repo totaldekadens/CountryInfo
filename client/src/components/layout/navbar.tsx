@@ -9,11 +9,12 @@ import {
     useTheme,
 } from "@mui/material";
 import DrawerComp from "../interaction/drawer";
-import { list } from "../../data";
+import { image, list } from "../../data";
 import { RegionContext } from "../context/regionProvider";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CountryContext } from "../context/countryProvider";
+import SearchEngine from "../interaction/search";
 
 const Navbar: FC = () => {
 
@@ -50,12 +51,10 @@ const Navbar: FC = () => {
     }
 
     return (
-        <AppBar sx={{ background: "#063970" }}>
+        <AppBar sx={{ background: "#EFF6FF" }}>
             <Toolbar>
-            <Link to={"/"} ><img onClick={handleHomeClick} src="https://www.freepnglogos.com/uploads/world-map-png/world-map-world-earth-globe-vector-graphic-pixabay-25.png" width="42px" alt="world map" /></Link>
-                <Typography sx={{ fontSize: "2rem", paddingLeft: "5%" }}>
-                        Country Info
-                </Typography>
+            <Link to={"/"} ><img onClick={handleHomeClick} src={image} width="42px" alt="world map" /></Link>
+            {region.length > 0 ? <SearchEngine heightButton={"30px"} heightInput={"0px"} widthInput={"200px"} type={"navbar"} top={"-8px"} /> : ""}
             {isMatch ? (
                 <>
                 <DrawerComp />
@@ -71,7 +70,7 @@ const Navbar: FC = () => {
                 <Tabs
                     sx={{ marginLeft: "auto"}}
                     indicatorColor="primary"
-                    textColor="inherit"
+                    textColor="primary"
                     value={value}
                     onChange={(e, value) => setValue(value)}
                 >

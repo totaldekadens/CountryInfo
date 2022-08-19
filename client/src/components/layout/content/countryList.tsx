@@ -8,6 +8,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import { CountryContext } from "../../context/countryProvider";
 import { useParams } from "react-router-dom";
+import { flex, flexColumn } from "../../../style/common";
 
 interface Props {
     search?: string
@@ -15,9 +16,6 @@ interface Props {
 
 const CountryList: FC<Props> = (props) => {
     
-    // Gets the search value from url
-    const { value } = useParams();
-
     // Context
     const {region} = useContext(RegionContext)
     const {setCountry} = useContext(CountryContext)
@@ -28,12 +26,16 @@ const CountryList: FC<Props> = (props) => {
     }
 
     return region.length >= 1 ? (
-        <div>
-            <h1 style={{ paddingLeft: '20px', fontSize: props.search ? "20px" : "50px", color: "#063960"}}>
-                { props.search ? props.search + "'" + value + "'" : region[0].region }
-            </h1> 
-            <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', maxHeight: "70vh", overflowY: "scroll"}}>
-            
+        <>
+        <div style={{...flexColumn, alignItems: "center"}}>
+            <List dense sx={{ 
+                width: '100%', 
+                maxWidth: 360, 
+                bgcolor: 'background.paper', 
+                maxHeight: "70vh", 
+                overflowY: "scroll",
+                backgroundColor: "#EFF6FF"}}
+            >
             {region.map((value: any) => {
                 return (
                 <ListItem
@@ -55,6 +57,7 @@ const CountryList: FC<Props> = (props) => {
             })}
             </List>
         </div>
+        </>
     ) : <p>No countries found</p>;
 }
 
