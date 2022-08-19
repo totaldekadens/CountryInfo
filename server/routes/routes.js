@@ -1,8 +1,8 @@
-import noteRoutes from "./noteRouter.js"
-import countryRoutes from "./countryRouter.js";
+import noteRoutes from "./noteRoutes.js"
+import countryRoutes from "./countryRoutes.js";
 
-const routes = (app, fs) => {
-    noteRoutes(app, fs);
+const routes = (app) => {
+    noteRoutes(app)
     countryRoutes(app)
 }
 
