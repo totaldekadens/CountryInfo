@@ -4,7 +4,6 @@ import {
     Tab,
     Tabs,
     Toolbar,
-    Typography,
     useMediaQuery,
     useTheme,
 } from "@mui/material";
@@ -25,11 +24,9 @@ const Navbar: FC = () => {
     // State
     const [value, setValue] = useState();
 
-    // Check theme
+    // Check theme mediaquery
     const theme = useTheme();
-    /* console.log(theme); */
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
- /*    console.log(isMatch); */
 
     // If value matches with a region in the api it will show up as a result
     const handleClick = async(region: any) => {

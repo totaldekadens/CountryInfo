@@ -25,7 +25,7 @@ const CountryList: FC<Props> = (props) => {
         setCountry(chosenCountry)
     }
 
-    return region.length >= 1 ? (
+    return region.length > 0 ? (
         <>
         <div style={{...flexColumn, alignItems: "center"}}>
             <List dense sx={{ 
@@ -46,7 +46,7 @@ const CountryList: FC<Props> = (props) => {
                     <ListItemButton>
                         <ListItemAvatar>
                             <Avatar
-                            alt={`${value.flags.png}`}
+                            alt={`Flag of ${value.name.common}`}
                             src={`${value.flags.png}`}
                             />
                         </ListItemAvatar>

@@ -1,25 +1,9 @@
-
+import { Comment, AddComment } from '../data'
 
 interface Body {
     method: string
     headers?: {}
     body?: string
-}
-
-interface Comment {
-    "id": number | string,
-    "country": string
-    "city": string
-    "name": string
-    "comment": string
-    "date": string
-}
-
-export interface AddComment {
-    "country": string
-    "city": string
-    "name": string
-    "comment": string
 }
 
 const makeRequest = async (url : string, body?: Body ) => {

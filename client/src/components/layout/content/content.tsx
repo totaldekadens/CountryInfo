@@ -17,7 +17,7 @@ const Content: FC<Props> = (props) => {
     // Gets the search value from url
     const { value } = useParams();
 
-    // If region has any value the list will show up instead of FrontPage and viceverca
+    // If region has any value, the list will show up instead of FrontPage and viceverca
     return region.length >= 1 ? (
         <>
         <div style={{...flex, width: "100vw", justifyContent: "center", margin: "100px 0px 10px 0px"}}>   

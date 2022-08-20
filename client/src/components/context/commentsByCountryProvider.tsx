@@ -1,16 +1,8 @@
 import React, { createContext, FC, PropsWithChildren, useState } from "react";
-
-interface Comment {
-    "id": number | string,
-    "country": string
-    "city": string
-    "name": string
-    "comment": string
-    "date": string
-}
+import { Comment } from '../../data'
 
 interface CommentsByCountryContextData {
-    comments:  any  
+    comments:  Comment[] | [] 
     setComments: React.Dispatch<React.SetStateAction<[] | Comment[]>>
 }
 

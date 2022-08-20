@@ -4,7 +4,7 @@ import Content from "./content";
 import FrontPage from "./frontPage";
 
 const ContentContainer: FC = () => {
-    // Todo: Add another route for country? 
+    // Todo: Fix all routes!
     return (
         <>
             <Routes>
