@@ -1,9 +1,7 @@
 import { CSSProperties, FC } from "react"
-import { flexCenter, flexColumn, flexRowBetween, flexRowCenter } from "../../../style/common"
-import CountryList from "./countryList"
-import CountrySingle from "./countrySingle"
+import { flexColumn } from "../../../style/common"
 import SearchEngine from "../../interaction/search"
-import { image, image2 } from "../../../data"
+import { image2 } from "../../../data"
 
 const FrontPage: FC = () => {
     return(
@@ -12,7 +10,7 @@ const FrontPage: FC = () => {
             <img 
                 src={image2} 
                 width="100%" 
-                alt="world map transparent png pictures icons and png"
+                alt="world map"
                 style={{minHeight: "100vh", objectFit: "cover"}}
             />
         </div>

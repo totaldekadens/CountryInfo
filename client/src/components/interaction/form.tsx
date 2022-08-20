@@ -1,136 +1,61 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC } from 'react';
 import Button from '@mui/material/Button';
 import { flex, flexCenter } from '../../style/common';
-import { CountryContext } from '../context/countryProvider';
-import { AddComment, addComment, getAllCommentsByCountry } from '../../helpers/fetchHelper';
-import validateForm from '../../validation/validateForm';
-import { CommentsByCountryContext } from '../context/commentsByCountryProvider';
+import { Comment, handleInput } from '../../data';
 
 interface Props {
-    isUpdate?: boolean
-    comment: any // Så länge
+    handleClick:  (event: {
+        preventDefault: () => void;
+    }) => Promise<void>
+    isUpdate: boolean
+    state: Comment
+    setState: React.Dispatch<React.SetStateAction<Comment>>
+    error: any
 }
 
 const CommentForm: FC<Props> = (props) => {
 
-    // Context
-    const {country} = useContext(CountryContext)
-    const {comments, setComments} = useContext(CommentsByCountryContext)
-
-    // States
-    const [name, setName] = useState<string>("")
-    const [city, setCity] = useState<string>("")
-    const [comment, setComment] = useState<string>("")
-    const [error, setError] = useState({name: "", city: "", comment: ""})
-
-    // If you got an error on any input and then move on to another country, the values will go to default.
-    useEffect(() => {
-        if(country) {
-            setError({name: "", city: "", comment: ""})
-            setName("")
-            setCity("")
-            setComment("")
-        }
-    }, [country])
-
-
-    // Creates new comment
-    const handleClick = async () => {
-
-        const newComment: AddComment = {
-            name: name,
-            city: city,
-            comment: comment,
-            country: country.name.common
-        }
-
-        // Validation
-        const checkErrors = validateForm(newComment)
-
-        if(Object.keys(checkErrors).length > 0) {
-            setError(checkErrors)
-            return
-        }
-
-        try {
-            
-            let result = await addComment(newComment)
-    
-            if(result) {
-                setName("")
-                setCity("")
-                setComment("")
-                setError({name: "", city: "", comment: ""})
-
-                // Fetches and Updates context with current comments on country
-                let updateComments = await getAllCommentsByCountry(country.name.common)
-
-                    if(updateComments) {
-                        setComments(updateComments)
-                    }
-                // To do : Lägg till feedback och se till att kommentarerna uppdaterar sig med en gång
-            }
-
-        } catch(err) {
-            console.error(err)
-        }
-    }
-
-   
+    // Gets back an updated list with current states and errors for each input we want to create and also necessary info for each input. 
+    const HandleList = handleInput(props.state, props.error)
 
     return (
         <>
         {props.isUpdate ?
-        <div style={flexCenter}>
-            <h3>Edit comment</h3>
-        </div> : <div></div>}
+            <div style={flexCenter}>
+                <h3>Edit comment</h3>
+            </div> : ""}
         
-        <Box
-            component="form"
-            sx={{
-                '& > :not(style)': { m: 1, width: '25ch' },
-            }}
-            noValidate
-            autoComplete="off"
-        >
-            <TextField
-                id="standard-basic"
-                label="Name"
-                variant="standard"
-                onChange={(event) => { setName( props.comment ? props.comment.name : event.target.value) }}
-                value={name} 
-                required
-                error= {error?.name ? true : false}
-                helperText= {error?.name ? error.name : ""}
-            />
-            <TextField
-                id="standard-basic"
-                label="City"
-                variant="standard"
-                onChange={(event) => { setCity(event.target.value) }}
-                value={city}
-                required
-                error= {error?.city ? true : false}
-                helperText= {error?.city ? error.city : ""}
-            />
-            <TextField
-                id="standard-multiline-static"
-                label="Comment"
-                multiline
-                rows={4}
-                variant="standard"
-                onChange={(event) => { setComment(event.target.value) }}
-                value={comment}
-                required
-                error= {error?.comment ? true : false}
-                helperText= {error?.comment ? error.comment : ""}
-            />
-            <div style={{...flex, justifyContent: "flex-end", marginTop: "10px"}}>
-                <Button onClick={handleClick} variant="contained">{ props.isUpdate ? "Update comment" : "Add comment"}</Button>
-            </div>
-        </Box>
+            <Box
+                component="form"
+                sx={{
+                    '& > :not(style)': { m: 1, width: '25ch' },
+                }}
+                noValidate
+                autoComplete="off"
+            >
+                {HandleList ? 
+                    HandleList.map((item) => {
+                        return(
+                            <TextField
+                                id="standard-basic"
+                                label={item.title}
+                                variant="standard"
+                                onChange={(event) => { props.setState(currentState => ({ ...currentState, [item.name]: event.target.value }))}}
+                                value={item.state} 
+                                required
+                                error= {item.error ? true : false}
+                                helperText= {item.error ? item.error : ""}
+                            />
+                        )
+                    })
+                    
+                : ""}
+                <div style={{...flex, justifyContent: "flex-end", marginTop: "10px"}}>
+                    <Button onClick={props.handleClick} variant="contained">{ props.isUpdate ? "Update comment" : "Add comment"}</Button>
+                </div>
+            </Box>
         </>
     );
 }

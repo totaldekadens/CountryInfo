@@ -14,6 +14,7 @@ const CountrySingle: FC = () => {
     // Context
     const {country} = useContext(CountryContext)
 
+    // State
     const [value, setValue] = React.useState('1');
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -23,7 +24,7 @@ const CountrySingle: FC = () => {
 
     return Object.keys(country).length > 0 ? (
 
-        <div style={{...flex, /* justifyContent: "flex-end" ,*/ marginTop: "32px"}}>
+        <div style={{...flex, marginTop: "32px"}}>
             <div style={{...flexColumn, paddingLeft: "50px", width:"550px"}}>
                 <h1 style={{color: "#063970"}}>{country.name.common}</h1>
                 <div style={{marginBottom:"5px"}}><img style={{height:"15vh"}} src={country.flags.png} alt="" /></div>  
