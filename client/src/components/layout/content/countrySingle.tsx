@@ -1,5 +1,5 @@
 import { FC, useContext } from "react"
-import { flex, flexCenter, flexColumn } from "../../../style/common"
+import { flex, flexColumn } from "../../../style/common"
 import { CountryContext } from "../../context/countryProvider"
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -8,11 +8,13 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Comments from "../../interaction/comments";
+import { CommentsByCountryContext } from "../../context/commentsByCountryProvider";
 
 const CountrySingle: FC = () => {
 
     // Context
     const {country} = useContext(CountryContext)
+    const {comments, setComments} = useContext(CommentsByCountryContext)
 
     // State
     const [value, setValue] = React.useState('1');
@@ -33,7 +35,7 @@ const CountrySingle: FC = () => {
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <TabList onChange={handleChange} aria-label="lab API tabs example">
                             <Tab label="Info" value="1" />
-                            <Tab label="Comments" value="2" />
+                            <Tab label={`Comments (${comments.length})`} value="2" />
                         </TabList>
                         </Box>
                         <TabPanel sx={{display: "flex"}} value="1">
@@ -42,19 +44,22 @@ const CountrySingle: FC = () => {
                                     <strong>Capital: </strong><span>{country.capital ? country.capital[0] : "No capital"}</span>
                                 </div>
                                 <div>
-                                    <strong>Continent: </strong><span>{country.continents[0]}</span>
+                                    <strong>Continent: </strong><span>{country.continents ? country.continents[0] : "-"}</span>
                                 </div>
                                 <div>
-                                    <strong>Subregion: </strong><span>{country.subregion}</span>
+                                    <strong>Subregion: </strong><span>{country.subregion ? country.subregion : "-"}</span>
                                 </div>
                                 <div>
-                                    <strong>Population: </strong><span>{country.population}</span>
+                                    <strong>Population: </strong><span>{country.population ? country.population : "-"}</span>
                                 </div>
                                 <div>
                                     <strong>Currency: </strong>
-                                    <ul>
-                                        <li>{Object.entries(country.currencies)[0][0]}</li>
-                                    </ul>
+                                    {country.currencies ? 
+                                        <ul>
+                                            <li>{Object.entries(country.currencies)[0][0]}</li>
+                                        </ul>
+                                    :   
+                                        <span>-</span>}
                                 </div>
                                 <div>
                                     <strong>Languages: </strong>
@@ -87,7 +92,7 @@ const CountrySingle: FC = () => {
             </div>
         </div>
         
-    ) : <p></p>
+    ) : <p></p> // Maybe set a pic of the chosen region before a country get clicked on
 }
 
 export default CountrySingle

@@ -9,21 +9,34 @@ import Avatar from '@mui/material/Avatar';
 import { CountryContext } from "../../context/countryProvider";
 import { useParams } from "react-router-dom";
 import { flex, flexColumn } from "../../../style/common";
+import { Link as RouterLink } from "react-router-dom";
+import { CommentsByCountryContext } from "../../context/commentsByCountryProvider";
+import { getAllCommentsByCountry } from "../../../helpers/fetchHelper";
 
-interface Props {
-    search?: string
-}
+interface Props {}
 
 const CountryList: FC<Props> = (props) => {
     
     // Context
     const {region} = useContext(RegionContext)
     const {setCountry} = useContext(CountryContext)
+    const {setComments} = useContext(CommentsByCountryContext)
 
-    // Sets value (the object of the chosen country) to country. Will be shown in "CountrySingle"
-    const handleClick = (chosenCountry: any) => {
+    
+    const handleClick = async (chosenCountry: any) => {
+        // Sets value (the object of the chosen country) to country(context). Will be shown in "CountrySingle"
         setCountry(chosenCountry)
+
+        // Gets the chosen country's comments and updates the comment context. 
+        let result = await getAllCommentsByCountry(chosenCountry.name.common)
+
+        if(result) {
+            setComments(result)
+        }
     }
+
+    
+    const { regionPar } = useParams();
 
     return region.length > 0 ? (
         <>
@@ -42,6 +55,7 @@ const CountryList: FC<Props> = (props) => {
                     key={value.name.common}
                     disablePadding
                     onClick={() => {handleClick(value)}}
+                    component={RouterLink} to= {`/${regionPar}/${value.name.common}` }
                 >
                     <ListItemButton>
                         <ListItemAvatar>

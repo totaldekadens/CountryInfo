@@ -3,9 +3,10 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { FC, useState, useContext, CSSProperties } from 'react';
 import { RegionContext } from '../context/regionProvider';
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, Navigate } from "react-router-dom";
 import { flexCenter } from '../../style/common';
 import { CountryContext } from '../context/countryProvider';
+import { getCountry } from '../../helpers/fetchHelper';
 
 interface Props {
     heightButton: string
@@ -13,7 +14,9 @@ interface Props {
     widthInput: string
     top?: string
     type?: string
+    tabValue?: React.Dispatch<React.SetStateAction<number | boolean>>
 }
+
 
 const SearchEngine: FC<Props> = (props) => {
     
@@ -26,11 +29,22 @@ const SearchEngine: FC<Props> = (props) => {
 
     // If value matches with a country in the api it will show up as a result
     const handleClick = async () => {
-        try {
-                let response = await fetch(`http://localhost:4000/api/external/country/${searchValue}`)
-                let result = await response.json();
-    
-                if(result) {
+        try {   
+                // Removes focus from any region tab in navbar
+                if(props.tabValue) {
+                    props.tabValue(false);
+                }
+                
+                // resets region so the search result will be clean
+                setRegion([])
+
+                if(searchValue.length < 1) {
+                    return
+                } 
+
+                let result = await getCountry(searchValue);
+            
+                if(result && result.message != 404) {
                     setRegion(result)
                     setCountry([])
                     setSearchValue("")
@@ -42,17 +56,9 @@ const SearchEngine: FC<Props> = (props) => {
 
     return (
         <div style={!props.type ? container : container2 }>
-            <Box
-                component="form"
-                sx={{
-                    '& .MuiTextField-root': { m: 1, width: !props.type ? '35ch' : '22ch'},
-                }}
-                noValidate
-                autoComplete="off"
-            >
-                <div style={flexCenter}>
+                <div style={{...flexCenter,  width: !props.type ? '450px' : '300px'}}>
                     <TextField
-                    id="standard-search"
+                    id="standard"
                     label="Search country.."
                     type="text"
                     variant="outlined"
@@ -68,12 +74,12 @@ const SearchEngine: FC<Props> = (props) => {
                     style={{boxShadow: !props.type ? "0px 0px 10px black" : "0px", marginLeft: "20px", height: props.heightButton, opacity: "0.8"}}
                     variant="contained"
                     onClick={handleClick}
-                    component={RouterLink} to={`/search/${searchValue}`}
+                    component={RouterLink} to={ searchValue ? `/search/${searchValue}` : `/search/""`}
                 >
                     Search
                 </Button>
-                </div>
-            </Box>
+            </div>
+            
         </div>
         
     );
