@@ -10,7 +10,7 @@ const countryRoutes = (app) => {
     app.route("/api/external/region/:region")
         .get(getRegion)
     
-    // GET all countries within a region (EXTERNAL)
+    // GET specific country (EXTERNAL)
     app.route("/api/external/country/:country")
         .get(getCountry)
 }

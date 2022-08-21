@@ -14,6 +14,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CountryContext } from "../context/countryProvider";
 import SearchEngine from "../interaction/search";
+import { getRegion } from "../../helpers/fetchHelper";
 
 const Navbar: FC = () => {
 
@@ -22,7 +23,7 @@ const Navbar: FC = () => {
     const {setCountry} = useContext(CountryContext)
 
     // State
-    const [value, setValue] = useState();
+    const [value, setValue] = useState<boolean | number>(false);
 
     // Check theme mediaquery
     const theme = useTheme();
@@ -31,8 +32,8 @@ const Navbar: FC = () => {
     // If value matches with a region in the api it will show up as a result
     const handleClick = async(region: any) => {
         try {
-            let response = await fetch(`http://localhost:4000/api/external/region/${region}`)
-            let result = await response.json();
+            setCountry([])
+            let result = await getRegion(region)
 
             if(result) {
                 setRegion(result)
@@ -41,29 +42,24 @@ const Navbar: FC = () => {
             console.error(err)
         }
     }
-
+    // Resets alla values when it comes to country and regions when yoy click on home button
     const handleHomeClick = () => {
         setCountry([])
         setRegion([])
+        setValue(false)
     }
 
     return (
         <AppBar sx={{ background: "#EFF6FF" }}>
             <Toolbar>
             <Link to={"/"} ><img onClick={handleHomeClick} src={image} width="42px" alt="world map" /></Link>
-            {region.length > 0 ? <SearchEngine heightButton={"30px"} heightInput={"0px"} widthInput={"200px"} type={"navbar"} top={"-8px"} /> : ""}
+            {region.length > 0 ? <SearchEngine tabValue={setValue} heightButton={"30px"} heightInput={"0px"} widthInput={"200px"} type={"navbar"} top={"-8px"} /> : ""}
             {isMatch ? (
                 <>
                 <DrawerComp />
                 </>
             ) : (
                 <>
-                {/* 
-                    MUI: The `value` provided to the Tabs component is invalid.
-                    None of the Tabs' children match with "undefined".
-                    You can provide one of the following values: 0, 1, 2, 3, 4. 
-                    -- Får problem när ingen är vald.
-                */}
                 <Tabs
                     sx={{ marginLeft: "auto"}}
                     indicatorColor="primary"
@@ -77,7 +73,7 @@ const Navbar: FC = () => {
                                 key={item} 
                                 onClick={() => {handleClick(item)}} 
                                 label={item} 
-                                component={RouterLink} to="/region"
+                                component={RouterLink} to={`/${item}`}
                             />
                         )
                     })}

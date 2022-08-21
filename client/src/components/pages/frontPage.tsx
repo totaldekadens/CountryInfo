@@ -1,7 +1,7 @@
 import { CSSProperties, FC } from "react"
-import { flexColumn } from "../../../style/common"
-import SearchEngine from "../../interaction/search"
-import { image2 } from "../../../data"
+import { flexColumn } from "../../style/common"
+import SearchEngine from "../interaction/search"
+import { image2 } from "../../data"
 
 const FrontPage: FC = () => {
     return(
