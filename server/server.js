@@ -1,6 +1,7 @@
 import express from "express";
 import cors from 'cors';
-import routes from "./routes/routes.js";
+import {router as noteRouter } from './routes/noteRouter.js'
+import {router as countryRouter } from './routes/countryRouter.js'
 
 const app = express()
 const port = 4000
@@ -12,7 +13,9 @@ app.get("/api", (req, res) => {
 app.use(express.json())
 app.use(cors());
 
-routes(app);
+app.use("/api/notes", noteRouter)
+app.use("/api/external", countryRouter)
+
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)

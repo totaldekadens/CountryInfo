@@ -19,7 +19,7 @@ const CountryList: FC<Props> = (props) => {
     
     // Context
     const {region} = useContext(RegionContext)
-    const {setCountry} = useContext(CountryContext)
+    const {country , setCountry} = useContext(CountryContext)
     const {setComments} = useContext(CommentsByCountryContext)
 
     
@@ -41,11 +41,12 @@ const CountryList: FC<Props> = (props) => {
     return region.length > 0 ? (
         <>
         <div style={{...flexColumn, alignItems: "center"}}>
+            {Object.keys(country).length > 0 ? <h3 style={{color: "#063960"}}>{region[0].region}</h3> : ""}
             <List dense sx={{ 
                 width: '100%', 
                 maxWidth: 360, 
                 bgcolor: 'background.paper', 
-                maxHeight: "70vh", 
+                maxHeight: "60vh", 
                 overflowY: "scroll",
                 backgroundColor: "#EFF6FF"}}
             >
