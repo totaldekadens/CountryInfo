@@ -128,7 +128,7 @@ const Comments: FC = () => {
                 return (
                     <div key={item.id}>
                         <div style={container} >
-                            <div style={{...flexRowBetween, justifyContent: "space-between", color: "#404040"}}>
+                            <div style={{...flexRowBetween, justifyContent: "space-between", color:   "#404040"}}>
                                 <div style={{...flex, alignItems: "center"}}>
                                     <Avatar />
                                     {item.name}

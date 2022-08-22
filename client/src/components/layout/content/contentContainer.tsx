@@ -12,7 +12,7 @@ const ContentContainer: FC = () => {
             <Routes>
                 <Route path="/" element={ <FrontPage /> } />
                 <Route path="/:regionPar" element={ <CountryPage /> } />
-                <Route path="/search/:value" element={ <CountryPage search={"Search result for: "} /> } />
+                <Route path="/search/:valuePar" element={ <CountryPage search={"Search result for: "} /> } />
                 <Route path="/:regionPar/:countryPar" element={ <CountryPage /> } />
             </Routes>
         </>

@@ -19,8 +19,8 @@ import { getRegion } from "../../helpers/fetchHelper";
 const Navbar: FC = () => {
 
     // Context
-    const {region, setRegion} = useContext(RegionContext)
-    const {setCountry} = useContext(CountryContext)
+    const { region, setRegion } = useContext(RegionContext)
+    const { setCountry } = useContext(CountryContext)
 
     // State
     const [value, setValue] = useState<boolean | number>(false);
@@ -30,15 +30,15 @@ const Navbar: FC = () => {
     const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
     // If value matches with a region in the api it will show up as a result
-    const handleClick = async(region: any) => {
+    const handleClick = async (region: any) => {
         try {
             setCountry([])
             let result = await getRegion(region)
 
-            if(result) {
+            if (result) {
                 setRegion(result)
-            }   
-        } catch(err) {
+            }
+        } catch (err) {
             console.error(err)
         }
     }
@@ -52,37 +52,48 @@ const Navbar: FC = () => {
     return (
         <AppBar sx={{ background: "#EFF6FF" }}>
             <Toolbar>
-            <Link to={"/"} ><img onClick={handleHomeClick} src={image} width="42px" alt="world map" /></Link>
-            {region.length > 0 ? <SearchEngine tabValue={setValue} heightButton={"30px"} heightInput={"0px"} widthInput={"200px"} type={"navbar"} top={"-8px"} /> : ""}
-            {isMatch ? (
-                <>
-                <DrawerComp />
-                </>
-            ) : (
-                <>
-                <Tabs
-                    sx={{ marginLeft: "auto"}}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    value={value}
-                    onChange={(e, value) => setValue(value)}
-                >
-                    {list.map((item) => {
-                        return (
-                            <Tab 
-                                key={item} 
-                                onClick={() => {handleClick(item)}} 
-                                label={item} 
-                                component={RouterLink} to={`/${item}`}
-                            />
-                        )
-                    })}
-                </Tabs>
-                </>
-            )}
+                <Link to={"/"} >
+                    <img onClick={handleHomeClick} src={image} width="42px" alt="world map" />
+                </Link>
+                {region.length > 0 ?
+                    <SearchEngine
+                        tabValue={setValue}
+                        heightButton={"30px"}
+                        heightInput={"0px"}
+                        widthInput={"200px"}
+                        type={"navbar"}
+                        top={"-8px"}
+                    />
+                    : ""}
+                {isMatch ? (
+                    <>
+                        <DrawerComp />
+                    </>
+                ) : (
+                    <>
+                        <Tabs
+                            sx={{ marginLeft: "auto" }}
+                            indicatorColor="primary"
+                            textColor="primary"
+                            value={value}
+                            onChange={(e, value) => setValue(value)}
+                        >
+                            {list.map((item) => {
+                                return (
+                                    <Tab
+                                        key={item}
+                                        onClick={() => { handleClick(item) }}
+                                        label={item}
+                                        component={RouterLink} to={`/${item}`}
+                                    />
+                                )
+                            })}
+                        </Tabs>
+                    </>
+                )}
             </Toolbar>
         </AppBar>
-    ) 
+    )
 }
 
 export default Navbar

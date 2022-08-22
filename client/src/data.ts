@@ -1,10 +1,12 @@
 import picture from './assets/world.png'
 import picture2 from './assets/hands.jpg'
+import picture3 from './assets/earth.png'
 
 export const list = ["Africa","America", "Asia", "Europe", "Oceania"]
 
 export const image = picture
 export const image2 = picture2
+export const image3 = picture3
 
 
 export interface Comment {
@@ -20,12 +22,6 @@ export interface AddComment {
     "country": string
     "city": string
     "name": string
-    "comment": string
-}
-
-export interface EditComment {
-    "name": string
-    "city": string
     "comment": string
 }
 
@@ -49,15 +45,6 @@ export const defaultComment = {
     name: "", 
     comment: "",
     date: ""
-}
-
-export interface Comment {
-    "id": string,
-    "country": string
-    "city": string
-    "name": string
-    "comment": string
-    "date": string
 }
 
 

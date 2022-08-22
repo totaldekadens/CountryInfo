@@ -1,7 +1,7 @@
 import { CSSProperties, FC } from "react"
 import { flexColumn } from "../../style/common"
 import SearchEngine from "../interaction/search"
-import { image2 } from "../../data"
+import { image2, image3 } from "../../data"
 
 const FrontPage: FC = () => {
     return(
@@ -11,7 +11,7 @@ const FrontPage: FC = () => {
                 src={image2} 
                 width="100%" 
                 alt="world map"
-                style={{minHeight: "100vh", objectFit: "cover"}}
+                style={{minHeight: "100vh", maxHeight: "100vh", objectFit: "cover"}}
             />
         </div>
     )

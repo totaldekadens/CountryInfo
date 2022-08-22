@@ -71,7 +71,7 @@ const AddCommentComp: FC = () => {
     }
 
     return (
-        <Accordion>
+        <Accordion sx={{padding: "0px"}}>
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"

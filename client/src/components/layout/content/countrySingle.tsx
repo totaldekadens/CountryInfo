@@ -81,9 +81,8 @@ const CountrySingle: FC = () => {
                                 {/* Embedded Googlemaps */} 
                                 {country.capitalInfo.latlng ? <iframe src={`https://maps.google.com/maps?q=${country.capitalInfo.latlng[0]},${country.capitalInfo.latlng[1]}&t=&z=15&ie=UTF8&iwloc=&output=embed`} width="200px" /> : ""}
                             </div>
-                            
                         </TabPanel>
-                        <TabPanel value="2">
+                        <TabPanel sx={{paddingTop: "0px", marginTop: "0px"}} value="2">
                             <Comments />
                         </TabPanel>
                     </TabContext>

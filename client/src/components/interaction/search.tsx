@@ -18,6 +18,7 @@ interface Props {
 }
 
 
+
 const SearchEngine: FC<Props> = (props) => {
     
     // Context
@@ -66,12 +67,12 @@ const SearchEngine: FC<Props> = (props) => {
                     value={searchValue}
                     sx={{
                         '& .MuiInputBase-root': {width: props.widthInput}, 
-                        input:{...inputProperties, height: props.heightInput, boxShadow: !props.type ? "0px 0px 10px black" : "0px"}, 
+                        input:{...inputProperties, height: props.heightInput, boxShadow: !props.type ? "0px 0px 20px black" : "0px"}, 
                         '& .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root': {top: props.top ? "-8px" : "0px"}
                     }}
                     />
                 <Button 
-                    style={{boxShadow: !props.type ? "0px 0px 10px black" : "0px", marginLeft: "20px", height: props.heightButton, opacity: "0.8"}}
+                    style={{boxShadow: !props.type ? "0px 0px 20px black" : "0px", marginLeft: "20px", height: props.heightButton, opacity: "0.8"}}
                     variant="contained"
                     onClick={handleClick}
                     component={RouterLink} to={ searchValue ? `/search/${searchValue}` : `/search/""`}

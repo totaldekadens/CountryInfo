@@ -39,6 +39,7 @@ const CommentForm: FC<Props> = (props) => {
                     HandleList.map((item) => {
                         return(
                             <TextField
+                                key={item.title}
                                 id="standard-basic"
                                 label={item.title}
                                 variant="standard"
