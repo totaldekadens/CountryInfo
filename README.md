@@ -52,3 +52,28 @@ Below follows the assignments different requirements in Swedish.
     -	Npm run dev
 
 
+## Sneak peak
+
+### Desktop
+![front](https://user-images.githubusercontent.com/90898648/186166042-f3e3b168-d82d-4676-bdcd-835081fbcac1.JPG)
+![vald region](https://user-images.githubusercontent.com/90898648/186166103-733282d5-e2f3-4290-8cfe-28628659ffea.JPG)
+![valt land](https://user-images.githubusercontent.com/90898648/186166156-a4073431-47d5-4750-b6aa-5c2686561698.JPG)
+![kommentarer](https://user-images.githubusercontent.com/90898648/186166196-7faf05f6-5a9d-488b-8cff-4f0972b31227.JPG)
+![lägg till kommentar](https://user-images.githubusercontent.com/90898648/186166345-1f0b92ec-6a3f-4244-9591-155925b7f562.JPG)
+![ändra kommentar](https://user-images.githubusercontent.com/90898648/186166357-607c6011-f79e-458e-bad0-9dd7da0f07c5.JPG)
+![sökresultat](https://user-images.githubusercontent.com/90898648/186166263-280e810c-6ebe-4373-8633-7e9741504a12.JPG)
+![sök not found](https://user-images.githubusercontent.com/90898648/186166288-415a0642-b003-47e0-b2eb-d0fe24fa9c7c.JPG)
+
+
+### Mobile
+![front](https://user-images.githubusercontent.com/90898648/186166549-3bc92d43-3dc6-4cbc-8a96-61b4c2394c8c.JPG)
+![drawer](https://user-images.githubusercontent.com/90898648/186166590-5d966b26-724e-464f-8744-b73926fea16d.JPG)
+![region](https://user-images.githubusercontent.com/90898648/186166703-bbb70836-7692-4107-b543-e6001337ebf3.JPG)
+![land](https://user-images.githubusercontent.com/90898648/186166750-3f61f9f7-9682-4df1-8744-518fa61a726f.JPG)
+![kommentar](https://user-images.githubusercontent.com/90898648/186166780-086f7af6-85c8-4f0b-b051-d006f60334d9.JPG)
+![sök](https://user-images.githubusercontent.com/90898648/186166795-8240a2d3-4c06-4b38-b4e0-6ca954cc2862.JPG)
+
+
+
+
+
