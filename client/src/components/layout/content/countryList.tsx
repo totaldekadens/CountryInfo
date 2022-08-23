@@ -7,11 +7,11 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import { CountryContext } from "../../context/countryProvider";
-import { useParams } from "react-router-dom";
-import { flex, flexColumn } from "../../../style/common";
+import { flexColumn } from "../../../style/common";
 import { Link as RouterLink } from "react-router-dom";
 import { CommentsByCountryContext } from "../../context/commentsByCountryProvider";
 import { getAllCommentsByCountry } from "../../../helpers/fetchHelper";
+import { colors } from "../../../data/colors";
 
 interface Props {}
 
@@ -35,20 +35,21 @@ const CountryList: FC<Props> = (props) => {
         }
     }
 
-    
-    const { regionPar } = useParams();
-
     return region.length > 0 ? (
         <>
         <div style={{...flexColumn, alignItems: "center"}}>
-            {Object.keys(country).length > 0 ? <h3 style={{color: "#063960"}}>{region[0].region}</h3> : ""}
+            {Object.keys(country).length > 0 ? <h3 style={{color: `${colors.primary}`}}>{region[0].region}</h3> : ""}
             <List dense sx={{ 
                 width: '100%', 
                 maxWidth: 360, 
                 bgcolor: 'background.paper', 
                 maxHeight: "60vh", 
                 overflowY: "scroll",
-                backgroundColor: "#EFF6FF"}}
+                backgroundColor: `${colors.fifth}`,
+                boxShadow: "0px 0px 5px gray",
+                border: `1px solid ${colors.third}`,
+                borderRadius: "5px"  
+            }}
             >
             {region.map((value: any) => {
                 return (
@@ -56,7 +57,7 @@ const CountryList: FC<Props> = (props) => {
                     key={value.name.common}
                     disablePadding
                     onClick={() => {handleClick(value)}}
-                    component={RouterLink} to= {`/${regionPar}/${value.name.common}` }
+                    component={RouterLink} to= {`/country` }
                 >
                     <ListItemButton>
                         <ListItemAvatar>
@@ -65,7 +66,7 @@ const CountryList: FC<Props> = (props) => {
                             src={`${value.flags.png}`}
                             />
                         </ListItemAvatar>
-                        <ListItemText primary={`${value.name.common}`} />
+                        <ListItemText sx={{color:"black"}} primary={`${value.name.common}`} />
                     </ListItemButton>
                 </ListItem>
                 ); 

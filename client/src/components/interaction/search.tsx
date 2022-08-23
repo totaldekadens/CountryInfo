@@ -7,6 +7,7 @@ import { Link as RouterLink, Navigate } from "react-router-dom";
 import { flexCenter } from '../../style/common';
 import { CountryContext } from '../context/countryProvider';
 import { getCountry } from '../../helpers/fetchHelper';
+import { colors } from '../../data/colors';
 
 interface Props {
     heightButton: string
@@ -57,7 +58,7 @@ const SearchEngine: FC<Props> = (props) => {
 
     return (
         <div style={!props.type ? container : container2 }>
-                <div style={{...flexCenter,  width: !props.type ? '450px' : '300px'}}>
+                <div style={{...flexCenter}}>
                     <TextField
                     id="standard"
                     label="Search country.."
@@ -67,22 +68,20 @@ const SearchEngine: FC<Props> = (props) => {
                     value={searchValue}
                     sx={{
                         '& .MuiInputBase-root': {width: props.widthInput}, 
-                        input:{...inputProperties, height: props.heightInput, boxShadow: !props.type ? "0px 0px 20px black" : "0px"}, 
+                        input:{...inputProperties, height: props.heightInput, boxShadow: !props.type ? "0px 0px 20px black" : "0px", background: `${colors.fifth}`, opacity: "0.9"}, 
                         '& .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root': {top: props.top ? "-8px" : "0px"}
                     }}
                     />
                 <Button 
-                    style={{boxShadow: !props.type ? "0px 0px 20px black" : "0px", marginLeft: "20px", height: props.heightButton, opacity: "0.8"}}
+                    style={{boxShadow: !props.type ? "0px 0px 20px black" : "0px", marginLeft: "20px", height: props.heightButton, opacity: "0.8", background: `${colors.fourth}`}}
                     variant="contained"
                     onClick={handleClick}
                     component={RouterLink} to={ searchValue ? `/search/${searchValue}` : `/search/""`}
                 >
                     Search
                 </Button>
-            </div>
-            
+            </div>  
         </div>
-        
     );
 }
 
@@ -94,8 +93,8 @@ const container : CSSProperties = {
 }
 
 const container2 : CSSProperties = {
-display: "flex",
-marginLeft: "20px"
+    display: "flex",
+    marginLeft: "20px"
 }
 
 const inputProperties : CSSProperties = {

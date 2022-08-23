@@ -1,5 +1,6 @@
 import Button from '@mui/material/Button';
 import { CSSProperties, FC, PropsWithChildren } from "react"
+import { colors } from '../../data/colors';
 
 interface Props {
 	shouldShow: boolean
@@ -12,7 +13,7 @@ const Modal: FC<PropsWithChildren<Props>> = (props) => {
 		<div style={ModalBackground}>
 			<div style={ModalBody} onClick={e => e.stopPropagation()}>
                 <Button 
-                    style={{ backgroundColor: "red"}}
+                    style={{ backgroundColor: "rgb(255,51,51,0.7)"}}
                     variant="contained"
                     onClick={() => {props.onRequestClose(false)}}
                 >
@@ -38,7 +39,7 @@ const ModalBackground: CSSProperties = {
 }
 
 const ModalBody: CSSProperties = {
-	backgroundColor: "white",
+	backgroundColor: `${colors.fifth}`,
 	margin: "10% auto",
 	padding: "20px",
     width:"50%",

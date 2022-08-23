@@ -9,6 +9,8 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Comments from "../../interaction/comments";
 import { CommentsByCountryContext } from "../../context/commentsByCountryProvider";
+import { colors } from "../../../data/colors";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 const CountrySingle: FC = () => {
 
@@ -19,16 +21,20 @@ const CountrySingle: FC = () => {
     // State
     const [value, setValue] = React.useState('1');
 
+    // Theme mediaquery
+    const theme = useTheme();
+    const isMatch = useMediaQuery(theme.breakpoints.down("md")); // if less than 900px match = true
+    const isSmMatch = useMediaQuery(theme.breakpoints.down("sm"));
+
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
 
 
     return Object.keys(country).length > 0 ? (
-
-        <div style={{...flex, marginTop: "32px"}}>
-            <div style={{...flexColumn, paddingLeft: "50px", width:"550px"}}>
-                <h1 style={{color: "#063970"}}>{country.name.common}</h1>
+        <div style={{...flex, marginTop: isMatch ? "0px": "32px"}}>
+            <div style={{...flexColumn, paddingLeft: "50px", width:"550px", borderLeft: "1px solid gray" }}>
+                <h1 style={{color: `${colors.primary}`}}>{country.name.common}</h1>
                 <div style={{marginBottom:"5px"}}><img style={{height:"15vh"}} src={country.flags.png} alt="" /></div>  
                 <Box sx={{ width: '100%', typography: 'body1' }}>
                     <TabContext value={value}>
@@ -76,11 +82,21 @@ const CountrySingle: FC = () => {
                                         
                                     </ul>
                                 </div>
+                                
+                                {isSmMatch ? 
+                                <div>
+                                    {/* Embedded Googlemaps */} 
+                                    {country.capitalInfo.latlng ? <iframe src={`https://maps.google.com/maps?q=${country.capitalInfo.latlng[0]},${country.capitalInfo.latlng[1]}&t=&z=15&ie=UTF8&iwloc=&output=embed`} width="200px" /> : ""}
+                                </div> : ""
+                                }   
                             </div>
+                            {!isSmMatch ? 
                             <div>
                                 {/* Embedded Googlemaps */} 
                                 {country.capitalInfo.latlng ? <iframe src={`https://maps.google.com/maps?q=${country.capitalInfo.latlng[0]},${country.capitalInfo.latlng[1]}&t=&z=15&ie=UTF8&iwloc=&output=embed`} width="200px" /> : ""}
-                            </div>
+                            </div> : ""
+                            }
+                            
                         </TabPanel>
                         <TabPanel sx={{paddingTop: "0px", marginTop: "0px"}} value="2">
                             <Comments />

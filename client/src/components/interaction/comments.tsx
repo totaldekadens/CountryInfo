@@ -7,10 +7,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import { deleteComment, getAllCommentsByCountry, editComment } from "../../helpers/fetchHelper";
 import { CommentsByCountryContext } from "../context/commentsByCountryProvider";
 import Modal from '../modal/modal'
-import { Comment, defaultComment, defaultError } from '../../data'
+import { Comment, defaultComment, defaultError } from '../../data/data'
 import validateForm from "../../validation/validateForm";
 import CommentForm from "./form";
 import AddCommentComp from "./addComment";
+import { colors } from "../../data/colors";
 
 const Comments: FC = () => {
 
@@ -119,8 +120,6 @@ const Comments: FC = () => {
 
 
 
-
-    
     return (
         <div style={flexColumn}>
             <AddCommentComp />
@@ -139,10 +138,10 @@ const Comments: FC = () => {
                             </div>
                             <div style={{...flexColumn, color: "#202020"}}>
                                 <div>
-                                    <strong>City: </strong><span>{item.city}</span>
+                                    <strong style={{fontSize: "14px"}}>City: </strong><span>{item.city}</span>
                                 </div>
-                                <strong>Comment: </strong>
-                                <span style={{fontSize: "12px"}}>{item.comment}</span>
+                                <strong style={{fontSize: "14px"}}>Comment: </strong>
+                                <span style={{fontSize: "14px"}}>{item.comment}</span>
                             </div>
                         </div>
                         <Modal shouldShow={shouldShowModal} onRequestClose={() => setShouldShowModal(false)} >
@@ -161,10 +160,11 @@ const Comments: FC = () => {
 const container: CSSProperties = {
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "lightblue",
+    backgroundColor: `${colors.fifth}`,
     marginTop: "10px",
     borderRadius: "5px",
-    padding: "5px"
+    padding: "5px",
+    boxShadow: "0px 0px 10px grey"
 }
 
 export default Comments

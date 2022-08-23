@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import { FC } from 'react';
 import Button from '@mui/material/Button';
 import { flex, flexCenter } from '../../style/common';
-import { Comment, handleInput } from '../../data';
+import { Comment, handleInput } from '../../data/data';
 
 interface Props {
     handleClick:  (event: {
@@ -12,7 +12,7 @@ interface Props {
     isUpdate: boolean
     state: Comment
     setState: React.Dispatch<React.SetStateAction<Comment>>
-    error: any
+    error: any // Fix any
 }
 
 const CommentForm: FC<Props> = (props) => {
@@ -41,6 +41,8 @@ const CommentForm: FC<Props> = (props) => {
                             <TextField
                                 key={item.title}
                                 id="standard-basic"
+                                multiline
+                                rows={item.rows}
                                 label={item.title}
                                 variant="standard"
                                 onChange={(event) => { props.setState(currentState => ({ ...currentState, [item.name]: event.target.value }))}}

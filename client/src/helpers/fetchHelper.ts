@@ -1,4 +1,4 @@
-import { Comment, AddComment } from '../data'
+import { Comment, AddComment } from '../data/data'
 
 interface Body {
     method: string
@@ -29,6 +29,10 @@ export const getAllCountries = async () => {
 // GET countries by region
 export const getRegion = async (region : string) => {
     let result = await makeRequest(`http://localhost:4000/api/external/region/${region}`);
+
+    // Fixa any!
+    result.sort((a: any, b: any) => a.name.common.localeCompare(b.name.common))
+    
     return result;
 }
 

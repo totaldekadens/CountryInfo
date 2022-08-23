@@ -8,8 +8,9 @@ import { CountryContext } from '../context/countryProvider';
 import { addComment, getAllCommentsByCountry } from '../../helpers/fetchHelper';
 import validateForm from '../../validation/validateForm';
 import { CommentsByCountryContext } from '../context/commentsByCountryProvider';
-import { AddComment, Comment, defaultComment, defaultError } from '../../data';
+import { AddComment, Comment, defaultComment, defaultError } from '../../data/data';
 import CommentForm from './form';
+import { colors } from '../../data/colors';
 
 const AddCommentComp: FC = () => {
 
@@ -71,7 +72,7 @@ const AddCommentComp: FC = () => {
     }
 
     return (
-        <Accordion sx={{padding: "0px"}}>
+        <Accordion sx={{padding: "0px", backgroundColor: `${colors.fifth}`}}>
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"

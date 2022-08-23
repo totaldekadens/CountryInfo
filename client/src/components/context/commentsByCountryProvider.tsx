@@ -1,5 +1,5 @@
 import React, { createContext, FC, PropsWithChildren, useState } from "react";
-import { Comment } from '../../data'
+import { Comment } from '../../data/data'
 
 interface CommentsByCountryContextData {
     comments:  Comment[] | [] 

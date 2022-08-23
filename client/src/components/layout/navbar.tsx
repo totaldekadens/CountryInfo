@@ -8,13 +8,14 @@ import {
     useTheme,
 } from "@mui/material";
 import DrawerComp from "../interaction/drawer";
-import { image, list } from "../../data";
+import { image, list } from "../../data/data";
 import { RegionContext } from "../context/regionProvider";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { CountryContext } from "../context/countryProvider";
 import SearchEngine from "../interaction/search";
 import { getRegion } from "../../helpers/fetchHelper";
+import { colors } from '../../data/colors'
 
 const Navbar: FC = () => {
 
@@ -25,9 +26,10 @@ const Navbar: FC = () => {
     // State
     const [value, setValue] = useState<boolean | number>(false);
 
-    // Check theme mediaquery
+    // Theme mediaquery
     const theme = useTheme();
-    const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+    const isMdMatch = useMediaQuery(theme.breakpoints.down("md")); // if less than 900px match = true
+    const isSmMatch = useMediaQuery(theme.breakpoints.down("sm")); // if less than 600px match = true
 
     // If value matches with a region in the api it will show up as a result
     const handleClick = async (region: any) => {
@@ -46,11 +48,11 @@ const Navbar: FC = () => {
     const handleHomeClick = () => {
         setCountry([])
         setRegion([])
-        setValue(false)
+        setValue(false) // tabs in nav
     }
 
     return (
-        <AppBar sx={{ background: "#EFF6FF" }}>
+        <AppBar sx={{ background: `${colors.fifth}`, opacity: "0.9"}}>
             <Toolbar>
                 <Link to={"/"} >
                     <img onClick={handleHomeClick} src={image} width="42px" alt="world map" />
@@ -60,21 +62,21 @@ const Navbar: FC = () => {
                         tabValue={setValue}
                         heightButton={"30px"}
                         heightInput={"0px"}
-                        widthInput={"200px"}
+                        widthInput={ isSmMatch ? "150px" : "200px"}
                         type={"navbar"}
                         top={"-8px"}
                     />
                     : ""}
-                {isMatch ? (
+                {isMdMatch ? (
                     <>
                         <DrawerComp />
                     </>
                 ) : (
                     <>
                         <Tabs
-                            sx={{ marginLeft: "auto" }}
                             indicatorColor="primary"
                             textColor="primary"
+                            sx={{ marginLeft: "auto" }}
                             value={value}
                             onChange={(e, value) => setValue(value)}
                         >
@@ -84,7 +86,7 @@ const Navbar: FC = () => {
                                         key={item}
                                         onClick={() => { handleClick(item) }}
                                         label={item}
-                                        component={RouterLink} to={`/${item}`}
+                                        component={RouterLink} to={`/country`}
                                     />
                                 )
                             })}

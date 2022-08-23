@@ -1,4 +1,4 @@
-import { AddComment } from '../data'
+import { AddComment } from '../data/data'
 import validationList from './validationList'
 
 const validateForm = (comment: AddComment) => {

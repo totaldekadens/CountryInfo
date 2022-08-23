@@ -28,7 +28,7 @@ GET http://localhost:4000/api/notes
 
 
 ### GET all notes on specific country
-GET http://localhost:4000/api/notes/country/China
+GET http://localhost:4000/api/notes/country/Sweden
 
 
 ### GET specific note by id
@@ -40,7 +40,7 @@ POST http://localhost:4000/api/notes
 Content-Type: application/json
 
 {
-    "country": "Norge",
+    "country": "Norway",
     "city": "Oslo",
     "name": "Ange",
     "comment": "Goa gubbar där också!"
@@ -52,8 +52,8 @@ PUT http://localhost:4000/api/notes
 Content-Type: application/json
 
 {   
-    "id": "3hF7MXSpDmJ2Eu_2GBn5W",
-    "country": "Norge",
+    "id": "SlKDpCm1u0nsVSR_vWdra",
+    "country": "Norway",
     "city": "Oslo",
     "name": "Ange",
     "comment": "Inte så goa gubbar längre",
@@ -63,4 +63,4 @@ Content-Type: application/json
 
 
 ### DELETE 
-DELETE  http://localhost:4000/api/notes/m4vgunNC3BApuve8GCtHB
+DELETE  http://localhost:4000/api/notes/SlKDpCm1u0nsVSR_vWdra

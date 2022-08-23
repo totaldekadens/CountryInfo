@@ -12,7 +12,7 @@ const todayDate = new Date().toISOString().slice(0, 10);
 // GET all notes from json file
 export const getAllNotes = (req, res) => {  
     try {
-
+        
         let data = fs.readFileSync(dataPath)
 
         res.json(JSON.parse(data)); 
@@ -85,12 +85,10 @@ export const deleteNote = (req, res) => {
         const updatedData = JSON.parse(data).filter(note => note.id != req.params.id)
         
         // updatedData replaces the previous data of the json-file
-        fs.writeFile(dataPath, JSON.stringify(updatedData), (err) => {
-            if (err) {
-                throw err;
-            }
-            res.json(`Note from ${foundNote.name} regarding ${foundNote.city} in ${foundNote.country} has been removed`);
-        })
+        fs.writeFileSync(dataPath, JSON.stringify(updatedData))
+        
+        res.json(`Note from ${foundNote.name} regarding ${foundNote.city} in ${foundNote.country} has been removed`);
+
     }catch(err) {
         res.status(404).json(err.message)
     }
