@@ -37,7 +37,7 @@ Below follows the assignments different requirements in Swedish.
 2. Resursen i ert API skall även ha endpoints för PUT, DELETE och GET för en entitet ✅
 
 
-
+Link to repo: https://github.com/totaldekadens/CountryInfo
 
 ## Installing
 
