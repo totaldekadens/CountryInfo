@@ -132,7 +132,7 @@ const Comments: FC = () => {
                                     <Avatar />
                                     {item.name}
                                 </div>
-                                <span style={{fontSize: "12px", color: "grey", marginRight: "10px", width: "90px"}}>{item.date}</span>
+                                <span style={{fontSize: "12px", color: "grey", marginRight: "10px", width: "115px"}}>{item.date}</span>
                                 <EditIcon style={{cursor: "pointer"}} onClick={() => {handleClick(item)}}/>
                                 <HighlightOffIcon style={{cursor: "pointer"}} onClick={() => {handleDelete(item.id)}} sx={{color: "rgb(255,51,51,0.7)"}}/>
                             </div>

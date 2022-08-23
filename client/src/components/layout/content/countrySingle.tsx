@@ -1,5 +1,5 @@
 import { FC, useContext } from "react"
-import { flex, flexColumn } from "../../../style/common"
+import { flex, flexCenter, flexColumn } from "../../../style/common"
 import { CountryContext } from "../../context/countryProvider"
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -11,11 +11,13 @@ import Comments from "../../interaction/comments";
 import { CommentsByCountryContext } from "../../context/commentsByCountryProvider";
 import { colors } from "../../../data/colors";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { Link } from "react-router-dom";
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 const CountrySingle: FC = () => {
 
     // Context
-    const {country} = useContext(CountryContext)
+    const {country, setCountry} = useContext(CountryContext)
     const {comments, setComments} = useContext(CommentsByCountryContext)
 
     // State
@@ -30,10 +32,15 @@ const CountrySingle: FC = () => {
         setValue(newValue);
     };
 
+    const handleBack = () => {
+        setCountry([])
+    }
+
 
     return Object.keys(country).length > 0 ? (
         <div style={{...flex, marginTop: isMatch ? "0px": "32px"}}>
             <div style={{...flexColumn, paddingLeft: "50px", width:"550px", borderLeft: "1px solid gray" }}>
+                {isMatch ? <Link to="/country" style={{textDecoration: "none"}}> <div style={{...flex, alignItems: "center", columnGap: "5px", color: `black` }}><KeyboardBackspaceIcon/><div onClick={handleBack} >Back</div></div></Link> : ""}
                 <h1 style={{color: `${colors.primary}`}}>{country.name.common}</h1>
                 <div style={{marginBottom:"5px"}}><img style={{height:"15vh"}} src={country.flags.png} alt="" /></div>  
                 <Box sx={{ width: '100%', typography: 'body1' }}>

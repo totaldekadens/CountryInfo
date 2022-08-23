@@ -12,16 +12,18 @@ import { Link as RouterLink } from "react-router-dom";
 import { CommentsByCountryContext } from "../../context/commentsByCountryProvider";
 import { getAllCommentsByCountry } from "../../../helpers/fetchHelper";
 import { colors } from "../../../data/colors";
+import { useMediaQuery, useTheme } from "@mui/material"
 
-interface Props {}
-
-const CountryList: FC<Props> = (props) => {
+const CountryList: FC = () => {
     
     // Context
     const {region} = useContext(RegionContext)
     const {country , setCountry} = useContext(CountryContext)
     const {setComments} = useContext(CommentsByCountryContext)
 
+    // Theme mediaquery
+    const theme = useTheme();
+    const isSmMatch = useMediaQuery(theme.breakpoints.down("sm"));
     
     const handleClick = async (chosenCountry: any) => {
         // Sets value (the object of the chosen country) to country(context). Will be shown in "CountrySingle"
@@ -40,7 +42,7 @@ const CountryList: FC<Props> = (props) => {
         <div style={{...flexColumn, alignItems: "center"}}>
             {Object.keys(country).length > 0 ? <h3 style={{color: `${colors.primary}`}}>{region[0].region}</h3> : ""}
             <List dense sx={{ 
-                width: '100%', 
+                width: isSmMatch ? '70%' : '100%', 
                 maxWidth: 360, 
                 bgcolor: 'background.paper', 
                 maxHeight: "60vh", 
