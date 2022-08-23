@@ -6,13 +6,18 @@ In this assignment, you must create a website that displays information retrieve
 
 You then choose for yourself if you want to use an extended development stack in the project, note that this is not a requirement. Examples of frameworks you can add to your stack are: Typescript, React, Vue, Angular, etc.
 
-### My projects structure
+### My project
 
-* Client: React.ts and mui
-* Server: Node.js using express
-* "Database": JSON-file using fs
+* Structure
+     - Client: React.ts and mui
+     - Server: Node.js using express
+     - "Database": JSON-file using fs
 
+* External API - https://restcountries.com/
+     - Gets information about countries
 
+* Own API
+     - Able to see, post, change and delete comments/notes about specific country 
 
 Below follows the assignments different requirements in Swedish.
 
@@ -32,8 +37,6 @@ Below follows the assignments different requirements in Swedish.
 2. Resursen i ert API skall även ha endpoints för PUT, DELETE och GET för en entitet ✅
 
 
-
-API: https://restcountries.com/
 
 
 ## Installing
