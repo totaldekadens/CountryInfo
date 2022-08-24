@@ -33,7 +33,7 @@ Below follows the assignments different requirements in Swedish.
 5. Ert API skall hämta och data ifrån ett externt API och skicka vidare datan till klienten ✅
 6. Git & GitHub har använts ✅
 7. Projektmappen innehåller en README.md fil ✅
-8. Uppgiften lämnas in i tid! ✅❌
+8. Uppgiften lämnas in i tid! ✅
 
 ### Krav för VG
 1. Alla punkter för godkänt är uppfyllda ✅
