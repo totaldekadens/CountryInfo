@@ -1,6 +1,7 @@
 import Button from '@mui/material/Button';
 import { CSSProperties, FC, PropsWithChildren } from "react"
 import { colors } from '../../data/colors';
+import { useMediaQuery, useTheme } from "@mui/material"
 
 interface Props {
 	shouldShow: boolean
@@ -9,9 +10,13 @@ interface Props {
 
 const Modal: FC<PropsWithChildren<Props>> = (props) => {
 
+	// Theme mediaquery
+	const theme = useTheme();
+	const isSmMatch = useMediaQuery(theme.breakpoints.down("sm"));
+
 	return props.shouldShow ? (
 		<div style={ModalBackground}>
-			<div style={ModalBody} onClick={e => e.stopPropagation()}>
+			<div style={{...ModalBody, width: isSmMatch ? "80%" : "50%"}} onClick={e => e.stopPropagation()}>
                 <Button 
                     style={{ backgroundColor: "rgb(255,51,51,0.7)"}}
                     variant="contained"
@@ -39,10 +44,12 @@ const ModalBackground: CSSProperties = {
 }
 
 const ModalBody: CSSProperties = {
+
+	
+
 	backgroundColor: `${colors.fifth}`,
 	margin: "10% auto",
 	padding: "20px",
-    width:"50%",
 	maxWidth: "475px",
     borderRadius: "10px"
 };

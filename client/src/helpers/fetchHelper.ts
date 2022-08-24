@@ -23,22 +23,31 @@ const makeRequest = async (url : string, body?: Body ) => {
 // GET All countries
 export const getAllCountries = async () => {
     let result = await makeRequest('http://localhost:4000/api/external/all');
-    return result;
+
+    if(Array.isArray(result)) {
+        result.sort((a: any, b: any) => a.name.common.localeCompare(b.name.common))
+        return result;
+    }
+
+    return false
 }
 
 // GET countries by region
 export const getRegion = async (region : string) => {
     let result = await makeRequest(`http://localhost:4000/api/external/region/${region}`);
 
-    // Fixa any!
-    result.sort((a: any, b: any) => a.name.common.localeCompare(b.name.common))
-    
-    return result;
+    if(Array.isArray(result)) {
+        result.sort((a: any, b: any) => a.name.common.localeCompare(b.name.common))
+        return result;
+    }
+
+    return false
 }
 
 // GET country
 export const getCountry = async (country : string) => {
     let result = await makeRequest(`http://localhost:4000/api/external/country/${country}`);
+
     return result;
 }
 

@@ -52,7 +52,7 @@ PUT http://localhost:4000/api/notes
 Content-Type: application/json
 
 {   
-    "id": "SlKDpCm1u0nsVSR_vWdra",
+    "id": "jnIY-apoWUBHfiOLJOmxN",
     "country": "Norway",
     "city": "Oslo",
     "name": "Ange",
@@ -63,4 +63,4 @@ Content-Type: application/json
 
 
 ### DELETE 
-DELETE  http://localhost:4000/api/notes/SlKDpCm1u0nsVSR_vWdra
+DELETE  http://localhost:4000/api/notes/jnIY-apoWUBHfiOLJOmxN

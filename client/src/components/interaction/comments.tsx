@@ -1,4 +1,4 @@
-import { CSSProperties, FC, useContext, useEffect, useRef, useState } from "react"
+import { CSSProperties, FC, useContext, useEffect, useState } from "react"
 import { flex, flexColumn, flexRowBetween } from "../../style/common"
 import { CountryContext } from "../context/countryProvider"
 import Avatar from '@mui/joy/Avatar';
