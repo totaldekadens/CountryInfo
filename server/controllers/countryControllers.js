@@ -8,7 +8,7 @@ export const getAllCountries =  async (req, res) => {
         let response = await fetch(`https://restcountries.com/v3.1/all`)
         let result = await response.json();
 
-        if(!result) {
+        if(!result || result.status == 500) {
             throw new Error("Something wrong with external api")
         } 
         
@@ -26,7 +26,7 @@ export const getRegion = async (req, res) => {
         let response = await fetch(`https://restcountries.com/v3.1/region/${req.params.region}`)
         let result = await response.json();
 
-        if(!result) {
+        if(!result || result.status == 404) {
             throw new Error("Region does not exist")
         } 
         
@@ -44,7 +44,7 @@ export const getCountry =  async (req, res) => {
         let response = await fetch(`https://restcountries.com/v3.1/name/${req.params.country}`)
         let result = await response.json();
 
-        if(!result) {
+        if(!result || result.status == 404) {
             throw new Error("Country does not exist")
         } 
         
