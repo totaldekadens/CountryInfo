@@ -14,7 +14,10 @@ You then choose for yourself if you want to use an extended development stack in
      - "Database": JSON-file using fs
 
 * External API - https://restcountries.com/
-     - Gets information about countries
+     - Gets information about countries. I have used: 
+          - List of all countries
+          - List of all countries by region
+          - specific country by country
 
 * Own API
      - Able to see, post, change and delete comments/notes about specific country 
